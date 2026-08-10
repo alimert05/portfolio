@@ -7,6 +7,8 @@
   let history = [];
   let historyPos = -1;
 
+  const PUBLICATION_URL = "https://arxiv.org/abs/2606.12210";
+
   const commands = {
     help: () => [
       "Available commands:",
@@ -18,10 +20,11 @@
       "  education     - education background",
       "  experience    - work experience",
       "  blog          - notes & writing",
+      "  play          - market sentiment challenge (beat the AI)",
       "  contact       - how to reach me",
       "  clear         - clear the terminal",
       "",
-      "Psst... try 'sudo hire-me', 'coffee', or 'joke'.",
+      "Psst... a couple of easter eggs are hiding in here too.",
     ],
     whoami: () => ["ali-mert-karaoglu", "role: AI Researcher / NLP & Explainable AI"],
     about: () => [
@@ -30,8 +33,10 @@
       "Starting an MSc in Cognitive Science at the University of Edinburgh in Sep 2026.",
     ],
     skills: () => [
+      "AI / ML       : Machine Learning (Advanced), Deep Learning, NLP, LLMs, Zero-shot Learning, XAI (Intermediate)",
+      "Frameworks    : PyTorch, Transformers, scikit-learn, Pandas, NumPy, SHAP",
+      "Research      : Experimental Design, Statistical Analysis, Data Analysis, Git, Linux",
       "Languages     : Python (Advanced), SQL, C, Java, Lean 3/4 (Intermediate)",
-      "AI / ML       : Machine Learning (Advanced), NLP, Zero-shot Learning, LLMs (Intermediate)",
       "Other         : Haskell, Assembler, HTML/CSS, JavaScript (Beginner)",
     ],
     projects: () => [
@@ -51,10 +56,10 @@
       "AI and Data Science Assistant Expert (Intern) - BNP Paribas (Jul-Aug 2025)",
       "Team Admin, My Robot Avatar Group Project - Univ. of Nottingham (Sep 2024-Jun 2025)",
     ],
-    blog: () => [
-      "No posts yet — coming soon.",
-      "Scroll up to the Blog section to check back later.",
-    ],
+    blog: () => {
+      window.open("blog.html", "_blank");
+      return ["Opening blog.html in a new tab...", "No posts yet — check back soon."];
+    },
     contact: () => [
       "email    : alimert.karaoglu@hotmail.com",
       "linkedin : linkedin.com/in/ali-mert-karaoglu",
@@ -65,13 +70,29 @@
       "Preprint: https://arxiv.org/abs/2606.12210",
       "Manuscript under peer review at Springer Nature's SN Computer Science.",
     ],
-    "sudo hire-me": () => [
-      "[sudo] password for recruiter: ********",
-      "Access granted.",
-      "Initiating hiring sequence... 100%",
-      "Result: excellent decision. Reach out via the contact section ✔",
-    ],
-    coffee: () => ["☕ brewing... here you go. Fuel for late-night model training."],
+    publication: () => {
+      window.open(PUBLICATION_URL, "_blank");
+      return ["Opening publication...", PUBLICATION_URL];
+    },
+    play: () => {
+      startGame();
+      return null;
+    },
+    replay: () => {
+      startGame();
+      return null;
+    },
+    "sudo hire-me": () => {
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact");
+        if (contactSection) contactSection.scrollIntoView({ behavior: "smooth" });
+      }, 700);
+      return [
+        "Permission granted.",
+        "Opening contact information...",
+      ];
+    },
+    coffee: () => ["Error: researcher already caffeinated."],
     joke: () => [
       pickJoke(),
     ],
@@ -111,6 +132,112 @@
     return jokeBag.splice(idx, 1)[0];
   }
 
+  // ===== Market Sentiment Challenge =====
+  const HEADLINES = [
+    {
+      text: "\"Company X reports record quarterly revenue, beating analyst expectations.\"",
+      answer: 1,
+      ai: 1,
+    },
+    {
+      text: "\"Regulators launch investigation into Company Y's accounting practices.\"",
+      answer: 2,
+      ai: 2,
+    },
+    {
+      text: "\"Central bank holds interest rates steady, in line with market expectations.\"",
+      answer: 3,
+      ai: 3,
+    },
+    {
+      text: "\"Company Z announces mass layoffs amid falling consumer demand.\"",
+      answer: 2,
+      ai: 2,
+    },
+    {
+      text: "\"Tech firm unveils breakthrough AI chip, shares surge in pre-market trading.\"",
+      answer: 1,
+      ai: 1,
+    },
+  ];
+
+  const gameState = {
+    active: false,
+    index: 0,
+    userScore: 0,
+    aiScore: 0,
+  };
+
+  function startGame() {
+    gameState.active = true;
+    gameState.index = 0;
+    gameState.userScore = 0;
+    gameState.aiScore = 0;
+
+    appendLine("");
+    appendLine("INITIALIZING MARKET SENTIMENT CHALLENGE...", "term-accent");
+    appendLine("");
+    appendLine("Can you beat a zero-shot AI model?");
+    showHeadline();
+  }
+
+  function showHeadline() {
+    const h = HEADLINES[gameState.index];
+    appendLine("");
+    appendLine("Headline:");
+    appendLine(h.text);
+    appendLine("");
+    appendLine("[1] BULLISH");
+    appendLine("[2] BEARISH");
+    appendLine("[3] NEUTRAL");
+    appendLine("");
+    appendLine("Your prediction (1/2/3):");
+  }
+
+  function handleGameInput(raw) {
+    const cmd = raw.trim();
+    const choice = parseInt(cmd, 10);
+
+    if (![1, 2, 3].includes(choice)) {
+      appendLine("Please enter 1, 2, or 3.", "term-error");
+      return;
+    }
+
+    const h = HEADLINES[gameState.index];
+    if (choice === h.answer) gameState.userScore++;
+    if (h.ai === h.answer) gameState.aiScore++;
+
+    gameState.index++;
+
+    if (gameState.index < HEADLINES.length) {
+      showHeadline();
+    } else {
+      endGame();
+    }
+  }
+
+  function endGame() {
+    gameState.active = false;
+    appendLine("");
+    appendLine("━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    appendLine("");
+    appendLine(`YOU        ${gameState.userScore}/${HEADLINES.length}`);
+    appendLine(`AI MODEL   ${gameState.aiScore}/${HEADLINES.length}`);
+    appendLine("");
+    if (gameState.userScore > gameState.aiScore) {
+      appendLine("YOU WIN! 🎉", "term-accent");
+    } else if (gameState.userScore < gameState.aiScore) {
+      appendLine("AI WINS.", "term-accent");
+    } else {
+      appendLine("IT'S A TIE.", "term-accent");
+    }
+    appendLine("");
+    appendLine("Think you can do better? Type 'replay' to try again.");
+    appendLine("");
+    appendLine("Based on my research in zero-shot financial sentiment analysis.");
+    appendLine("Type 'publication' to read the paper.");
+  }
+
   function appendLine(text, cls) {
     const line = document.createElement("div");
     line.className = "term-line " + (cls || "term-output");
@@ -142,6 +269,12 @@
     appendPromptEcho(cmd);
     history.push(cmd);
     historyPos = history.length;
+
+    if (gameState.active) {
+      handleGameInput(cmd);
+      scrollToBottom();
+      return;
+    }
 
     const key = cmd.toLowerCase();
     const handler = commands[key];
