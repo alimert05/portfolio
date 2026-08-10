@@ -421,23 +421,6 @@ section {
   height: 18px;
 }
 
-.about-hobbies {
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-  max-width: 700px;
-}
-
-.about-hobbies-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
-}
-
 .about-highlight {
   margin-top: 2rem;
   padding: 1.25rem 1.5rem;
@@ -784,39 +767,6 @@ section {
 .contact-card-value {
   font-size: 0.95rem;
   word-break: break-word;
-}
-
-/* ===== Hobbies ===== */
-.hobbies-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-}
-
-.hobby-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  transition: all var(--transition);
-}
-
-.hobby-item:hover {
-  border-color: var(--accent);
-  color: var(--text);
-  transform: translateY(-2px);
-}
-
-.hobby-item svg {
-  width: 22px;
-  height: 22px;
-  color: var(--accent);
-  flex-shrink: 0;
 }
 
 /* ===== Blog ===== */
