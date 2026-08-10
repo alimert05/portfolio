@@ -1,3 +1,41 @@
+// ===== BibTeX copy =====
+const bibtexBtn = document.getElementById("bibtex-copy");
+const bibtexSource = document.getElementById("bibtex-source");
+
+if (bibtexBtn && bibtexSource) {
+  bibtexBtn.addEventListener("click", async () => {
+    const label = bibtexBtn.querySelector("span");
+    const original = label.textContent;
+    try {
+      await navigator.clipboard.writeText(bibtexSource.textContent.trim());
+      label.textContent = "Copied!";
+    } catch (e) {
+      label.textContent = "Copy failed";
+    }
+    bibtexBtn.classList.add("is-copied");
+    setTimeout(() => {
+      label.textContent = original;
+      bibtexBtn.classList.remove("is-copied");
+    }, 1800);
+  });
+}
+
+// ===== Theme toggle =====
+const themeToggle = document.getElementById("theme-toggle");
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const isLight = document.documentElement.getAttribute("data-theme") === "light";
+    if (isLight) {
+      document.documentElement.removeAttribute("data-theme");
+      try { localStorage.setItem("theme", "dark"); } catch (e) {}
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      try { localStorage.setItem("theme", "light"); } catch (e) {}
+    }
+  });
+}
+
 // ===== Mobile nav toggle =====
 const navToggle = document.getElementById("nav-toggle");
 const navLinks = document.getElementById("nav-links");

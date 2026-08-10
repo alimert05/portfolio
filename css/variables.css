@@ -1,5 +1,6 @@
 :root {
   /* Colors */
+  --bg-rgb: 10, 14, 15;
   --bg: #0a0e0f;
   --surface: #12181a;
   --surface-hover: #17201f;
@@ -26,4 +27,18 @@
 
   /* Transitions */
   --transition: 0.25s ease;
+}
+
+:root[data-theme="light"] {
+  --bg-rgb: 245, 247, 246;
+  --bg: #f5f7f6;
+  --surface: #ffffff;
+  --surface-hover: #eef2f0;
+  --border: #dbe3df;
+  --text: #101513;
+  --text-dim: #565f5c;
+  --accent: #0e9d52;
+  --accent-dim: #0b7a40;
+  --accent-soft: rgba(14, 157, 82, 0.1);
+  --danger: #c73535;
 }
