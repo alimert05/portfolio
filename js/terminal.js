@@ -224,13 +224,24 @@
     appendLine(`YOU        ${gameState.userScore}/${HEADLINES.length}`);
     appendLine(`AI MODEL   ${gameState.aiScore}/${HEADLINES.length}`);
     appendLine("");
+
+    let outcome;
     if (gameState.userScore > gameState.aiScore) {
+      outcome = "win";
       appendLine("YOU WIN! 🎉", "term-accent");
     } else if (gameState.userScore < gameState.aiScore) {
+      outcome = "lose";
       appendLine("AI WINS.", "term-accent");
     } else {
+      outcome = "tie";
       appendLine("IT'S A TIE.", "term-accent");
     }
+
+    trackEvent(
+      `terminal/game-${outcome}`,
+      `Game result: ${outcome} (you ${gameState.userScore}/${HEADLINES.length}, ai ${gameState.aiScore}/${HEADLINES.length})`
+    );
+
     appendLine("");
     appendLine("Think you can do better? Type 'replay' to try again.");
     appendLine("");
@@ -285,11 +296,25 @@
       return;
     }
 
+    trackEvent(`terminal/${key}`, `Terminal command: ${key}`);
+
     const output = handler();
     if (output) {
       output.forEach((line) => appendLine(line));
     }
     scrollToBottom();
+  }
+
+  function trackEvent(path, title) {
+    try {
+      if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count({
+          path,
+          title: title || path,
+          event: true,
+        });
+      }
+    } catch (e) {}
   }
 
   input.addEventListener("keydown", (e) => {
