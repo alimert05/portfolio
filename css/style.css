@@ -71,8 +71,8 @@ section {
 .nav .container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2.5rem;
+  justify-content: flex-start;
+  gap: 1.5rem;
   height: 64px;
   max-width: 1280px;
 }
@@ -83,19 +83,18 @@ section {
   color: var(--accent);
   font-size: 1rem;
   letter-spacing: 0.01em;
-  padding-right: 1.5rem;
+  padding-right: 1.1rem;
   border-right: 1px solid var(--border);
   flex-shrink: 0;
-  margin-right: auto;
 }
 
 .nav-links {
   display: flex;
   flex: 1;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.1rem;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   white-space: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -208,6 +207,33 @@ section {
 
 [data-theme="light"] .theme-toggle .icon-moon {
   display: block;
+}
+
+@media (min-width: 901px) and (max-width: 1300px) {
+  .nav .container {
+    gap: 1rem;
+  }
+
+  .nav-logo {
+    padding-right: 0.85rem;
+  }
+
+  .nav-links {
+    gap: 0.7rem;
+  }
+
+  .nav-links a span {
+    display: none;
+  }
+
+  .nav-blog {
+    margin-left: 0.25rem;
+    padding-left: 0.85rem;
+  }
+
+  .theme-toggle {
+    margin-left: 0.5rem;
+  }
 }
 
 @media (max-width: 900px) {
