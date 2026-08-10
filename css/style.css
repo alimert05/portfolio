@@ -183,7 +183,7 @@ section {
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  margin-left: -1rem;
+  margin-left: auto;
   transition: all var(--transition);
 }
 
@@ -229,10 +229,6 @@ section {
   .nav-blog {
     margin-left: 0.25rem;
     padding-left: 0.85rem;
-  }
-
-  .theme-toggle {
-    margin-left: -0.5rem;
   }
 }
 
