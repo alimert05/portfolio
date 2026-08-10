@@ -183,7 +183,7 @@ section {
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  margin-left: 0.35rem;
+  margin-left: -1rem;
   transition: all var(--transition);
 }
 
@@ -232,13 +232,17 @@ section {
   }
 
   .theme-toggle {
-    margin-left: 0.25rem;
+    margin-left: -0.5rem;
   }
 }
 
 @media (max-width: 900px) {
   .nav .container {
     justify-content: space-between;
+  }
+
+  .theme-toggle {
+    margin-left: 0;
   }
 
   .nav-toggle {
