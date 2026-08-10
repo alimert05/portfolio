@@ -121,6 +121,22 @@ section {
   color: var(--accent);
 }
 
+.nav-blog {
+  margin-left: 0.5rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--border);
+}
+
+.nav-blog svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.nav-blog.is-active {
+  color: var(--accent);
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -199,6 +215,12 @@ section {
 
   .nav-links a span {
     display: inline;
+  }
+
+  .nav-blog {
+    margin-left: 0;
+    padding-left: 1.5rem;
+    border-left: none;
   }
 }
 
