@@ -183,7 +183,7 @@ section {
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  margin-left: 1rem;
+  margin-left: 0.35rem;
   transition: all var(--transition);
 }
 
@@ -232,7 +232,7 @@ section {
   }
 
   .theme-toggle {
-    margin-left: 0.5rem;
+    margin-left: 0.25rem;
   }
 }
 
