@@ -421,6 +421,23 @@ section {
   height: 18px;
 }
 
+.about-hobbies {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  max-width: 700px;
+}
+
+.about-hobbies-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
 .about-highlight {
   margin-top: 2rem;
   padding: 1.25rem 1.5rem;
