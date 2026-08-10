@@ -75,6 +75,7 @@ section {
   gap: 1.5rem;
   height: 64px;
   max-width: 1280px;
+  padding-right: 3.5rem;
 }
 
 .nav-logo {
@@ -171,19 +172,22 @@ section {
 }
 
 .theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: none;
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--text-dim);
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  margin-left: auto;
   transition: all var(--transition);
 }
 
@@ -234,11 +238,12 @@ section {
 
 @media (max-width: 900px) {
   .nav .container {
-    justify-content: space-between;
+    justify-content: flex-start;
+    padding-right: 3.25rem;
   }
 
   .theme-toggle {
-    margin-left: 0;
+    right: 1rem;
   }
 
   .nav-toggle {
@@ -247,6 +252,8 @@ section {
 
   .nav-logo {
     margin-right: 0;
+    border-right: none;
+    padding-right: 0;
   }
 
   .nav-links {
